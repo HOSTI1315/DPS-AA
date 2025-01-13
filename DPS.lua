@@ -378,10 +378,10 @@ local Units = {
         Placements = 3
     },
     ["Dark Mage"] = {
-        Damage = Calculate(1, 110),
-        SPA = 1,
-        Range = 1,
-        Placements = 1
+        Damage = Calculate(21060, 110),
+        SPA = 6.6,
+        Range = 28.4,
+        Placements = 3
     },
     ["Elf Mage (Aura)"] = {
         Damage = Calculate(20208.47, 110),
@@ -396,10 +396,15 @@ local Units = {
         Placements = 4
     },
     ["Ghost-kun (Bound)"] = {
-        Damage = Calculate(55612,04, 110),
+        Damage = Calculate(18531, 110),
         SPA = 12,
         Range = 37.5,
-        Placements = 3
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Fire",  -- Тип эффекта (огонь)
+            DamagePerTick = 0.50,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
     },
     ["Ghost-kun"] = {
         Damage = Calculate(4111, 110),
@@ -431,17 +436,27 @@ local Units = {
         Range = 28,
         Placements = 4
     },
-    ["Saki (Cyanblade)"] = {
-        Damage = Calculate(8436.15, 110),
+    ["Saka (Cyanblade)"] = {
+        Damage = Calculate(9450, 110),
         SPA = 5,
         Range = 24,
-        Placements = 5
+        Placements = 4
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 0.40,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
     },
-    ["Saki "] = {
-        Damage = Calculate(5400, 110),
+    ["Saka "] = {
+        Damage = Calculate(3000, 110),
         SPA = 6,
         Range = 23,
-        Placements = 5
+        Placements = 4
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Fire",  -- Тип эффекта (огонь)
+            DamagePerTick = 0.40,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
     },
     ["Gunslinger (Cross)"] = {
         Damage = Calculate(7700, 110),
@@ -539,6 +554,66 @@ local Units = {
         Range = 27,
         Placements = 3
     },
+    ["Stringy (Awakened)"] = {
+        Damage = Calculate(31500, 110),
+        SPA = 8,
+        Range = 38,
+        Placements = 3
+    },
+    ["Stringy"] = {
+        Damage = Calculate(8125, 110),
+        SPA = 7,
+        Range = 30,
+        Placements = 3
+    },
+    ["Gazu (Maximum)"] = {
+        Damage = Calculate(5320, 110),
+        SPA = 7.5,
+        Range = 30,
+        Placements = 4
+    },
+    ["Stringy"] = {
+        Damage = Calculate(3300, 110),
+        SPA = 5.5,
+        Range = 28,
+        Placements = 4
+    },
+    ["Golden King (Lord of Heroes)"] = {
+        Damage = Calculate(49000, 110),
+        SPA = 12,
+        Range = 35,
+        Placements = 3
+    },
+    ["Stringy"] = {
+        Damage = Calculate(13000, 110),
+        SPA = 9,
+        Range = 31,
+        Placements = 3
+    },
+    ["Ice Queen (Empire's Strongest)"] = {
+        Damage = Calculate(21775, 110),
+        SPA = 20,
+        Range = 32,
+        Placements = 3
+    },
+    ["Ice Queen (Esdeath)"] = {
+        Damage = Calculate(4500, 110),
+        SPA = 6,
+        Range = 26,
+        Placements = 3
+    },
+    ["Jelly (Heaven)"] = {
+        Damage = Calculate(5525, 110),
+        SPA = 9,
+        Range = 27.5,
+        Placements = 4
+    },
+    ["Jelly "] = {
+        Damage = Calculate(2100, 110),
+        SPA = 5.5,
+        Range = 27,
+        Placements = 3
+    },
     
     
     skrilya = {
@@ -609,32 +684,77 @@ local Traits = {
     } 
 }
 
--- Основная функция для обработки юнитов с их Traits
-local function SingleHandler(Name, Trait, Stats, Data)
+-- Функция для применения Bleed
+local function applyBleed(Stats, Effect)
+    local baseBleedDamage = Stats["Damage"] * Effect["DamagePerTick"]
+    local bleedDamageWithBuff = baseBleedDamage * Effect["DamagePerTickBuff"]
+    return bleedDamageWithBuff / Stats["SPA"]  -- Урон от Bleed за секунду
+end
+
+-- Функция для применения Poison
+local function applyPoison(Stats, Effect)
+    local basePoisonDamage = Stats["Damage"] * Effect["DamagePerTick"]
+    return basePoisonDamage / Stats["SPA"]  -- Урон от Poison за секунду
+end
+
+-- Функция для применения Decay
+local function applyDecay(Stats, Effect)
+    local decayDamage = Stats["Damage"] * 0.20  -- Урон от Decay — 20% от Damage
+    return decayDamage / Stats["SPA"]  -- Урон от Decay за секунду
+end
+
+-- Функция для применения Fire (огонь)
+local function applyFire(Stats, Effect)
+    local fireDamagePerTick = Stats["Damage"] * Effect["DamagePerTick"]
+    local totalFireDamage = fireDamagePerTick * Effect["Ticks"]  -- Урон за все тики
+    return totalFireDamage / Stats["SPA"]  -- Урон от Fire за секунду
+end
+
+-- Основная функция для расчета DPS
+local function SingleHandler(Name, Trait, Stats, Data, wave)
     local Placements = Stats["Placements"]
     local Effect = Stats["Effect"]
-    
-    local Damage = Stats["Damage"] * 1.2
-    local SPA = Stats["SPA"] * 0.9
-    local Range = Stats["Range"] * 1.1
+    local Damage = Stats["Damage"]
+    local SPA = Stats["SPA"]
+    local Range = Stats["Range"]
     local Critical = 1.5
-    local Rate = 0 
+    local Rate = 0
 
-    for i,v in next, Data do
-        if i == "Rate" then Rate = Rate + v 
+    -- Инициализация урона от DoT эффектов
+    local bleedDPS = 0
+    local poisonDPS = 0
+    local decayDPS = 0
+
+    -- Применяем эффекты, если они присутствуют
+    if Effect then
+        if Effect["Type"] == "Bleed" then
+            bleedDPS = applyBleed(Stats, Effect)
+        elseif Effect["Type"] == "Poison" then
+            poisonDPS = applyPoison(Stats, Effect)
+        elseif Effect["Type"] == "Decay" then
+            decayDPS = applyDecay(Stats, Effect)
+        end
+    end
+
+    -- Обработка данных (множители урона, SPA и т.д.)
+    for i, v in next, Data do
+        if i == "Rate" then Rate = Rate + v
         elseif i == "Critical" then Critical = Critical * v
         elseif i == "SPA" then SPA = SPA * v
         elseif i == "Damage" then Damage = Damage * v
-        elseif i == "Placements" then Placements = v 
+        elseif i == "Placements" then Placements = v
         elseif i == "Range" then Range = Range * v
-        end 
-    end 
+        end
+    end
 
+    -- Рассчитываем итоговый урон с учетом всех эффектов
     local CriticalDamage = Damage * (1 + Rate * (Critical - 1))
-    local DPS = CriticalDamage / SPA 
+    local DPS = CriticalDamage / SPA
 
-    if Effect then DPS = DPS + Damage * (Effect["Damage"] * Effect["Duration"]) / SPA end 
+    -- Добавляем DoT эффекты (например, Bleed, Poison, Decay)
+    DPS = DPS + bleedDPS + poisonDPS + decayDPS
 
+    -- Возвращаем результат расчета DPS для юнита
     return {
         Name = Name,
         Trait = Trait,
@@ -644,7 +764,8 @@ local function SingleHandler(Name, Trait, Stats, Data)
         Range = Range,
         Placements = Placements
     }
-end 
+end
+ 
 
 -- Применение всех Traits для одного трейта
 local function SingleTrait(Name, Stats)
@@ -736,8 +857,8 @@ local function OutputResultsToWebhook(webhookUrl)
     end
 
     -- Отправляем оба файла с результатами
-    sendWebhookWithFile(fileContentTrait, "unit_data_with_single_trait.txt")
-    sendWebhookWithFile(fileContentDoubleTrait, "unit_data_with_double_trait.txt")
+    sendWebhookWithFile(fileContentTrait, "DPS_single_trait.txt")
+    sendWebhookWithFile(fileContentDoubleTrait, "DPS_double_trait.txt")
 end
 
 -- Запуск отправки результатов на вебхук
