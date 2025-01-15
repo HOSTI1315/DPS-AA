@@ -300,16 +300,26 @@ local Units = {
         Placements = 4
     },
     ["Gas (Toxic)"] = {
-        Damage = Calculate(41040, 110),
-        SPA = 7,
-        Range = 35,
-        Placements = 4
+        Damage = Calculate(10800, 110),
+        SPA = 11,
+        Range = 30,
+        Placements = 4,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Poison",  -- Тип эффекта (огонь)
+            DamagePerTick = 3.00,  -- 50% от урона за тик
+            Ticks = 56,  -- Количество тиков (4 тика)
+        }
     },
     ["Gas (Caesar Clown)"] = {
-        Damage = Calculate(15200, 110),
+        Damage = Calculate(4000, 110),
         SPA = 12,
         Range = 28,
-        Placements = 4
+        Placements = 4,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Poison",  -- Тип эффекта (огонь)
+            DamagePerTick = 2.80,  -- 50% от урона за тик
+            Ticks = 56,  -- Количество тиков (4 тика)
+        }
     },
     ["Gravity Mage (Void)"] = {
         Damage = Calculate(20250, 110),
@@ -435,23 +445,23 @@ local Units = {
         SPA = 6,
         Range = 28,
         Placements = 4
-    },
+    }, 
     ["Saka (Cyanblade)"] = {
         Damage = Calculate(9450, 110),
         SPA = 5,
         Range = 24,
-        Placements = 4
+        Placements = 4,
         Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
             Type = "Bleed",  -- Тип эффекта (огонь)
             DamagePerTick = 0.40,  -- 50% от урона за тик
-            Ticks = 4,  -- Количество тиков (4 тика)
-        }
-    },
+            Ticks = 4  -- Количество тиков (4 тика)
+    }
+},
     ["Saka "] = {
         Damage = Calculate(3000, 110),
         SPA = 6,
         Range = 23,
-        Placements = 4
+        Placements = 4,
         Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
             Type = "Fire",  -- Тип эффекта (огонь)
             DamagePerTick = 0.40,  -- 50% от урона за тик
@@ -757,9 +767,13 @@ local Traits = {
 -- Функция для применения Bleed
 local function applyBleed(Stats, Effect)
     local baseBleedDamage = Stats["Damage"] * Effect["DamagePerTick"]
-    local bleedDamageWithBuff = baseBleedDamage * Effect["DamagePerTickBuff"]
+    
+    -- Устанавливаем значение по умолчанию для DamagePerTickBuff (если оно не задано)
+    local bleedDamageWithBuff = baseBleedDamage * (Effect["DamagePerTickBuff"] or 0)
+    
     return bleedDamageWithBuff / Stats["SPA"]  -- Урон от Bleed за секунду
 end
+
 
 -- Функция для применения Poison
 local function applyPoison(Stats, Effect)
