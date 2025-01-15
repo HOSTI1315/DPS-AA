@@ -77,13 +77,13 @@ local Units = {
         Range = 25,
         Placements = 3
     },
-    ["All Force (Symbol of Peace)"] = {
+    ["Prime Force (Peace)"] = {
         Damage = Calculate(7349, 110),
         SPA = 9,
         Range = 25,
         Placements = 4
     },
-    ALLFORCE = {
+    ["Prime Force"] = {
         Damage = Calculate(4000, 110),
         SPA = 4.5,
         Range = 25,
@@ -530,13 +530,23 @@ local Units = {
         Damage = Calculate(4550, 110),
         SPA = 6,
         Range = 30,
-        Placements = 5
+        Placements = 5,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
     },
     ["Eccentric Researcher (Captain)"] = {
         Damage = Calculate(5915, 110),
         SPA = 6,
         Range = 30,
-        Placements = 5
+        Placements = 5,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
     },
     ["Sepsis (Moon)"] = {
         Damage = Calculate(13775, 110),
@@ -785,6 +795,175 @@ local Units = {
         SPA = 7,
         Range = 27,
         Placements = 3
+    },
+    ["Illusionist (Betrayal)"] = {
+        Damage = Calculate(2600, 110),
+        SPA = 6.5,
+        Range = 22,
+        Placements = 3
+    },
+    ["Paragon (Devil)"] = {
+        Damage = Calculate(20800, 110),
+        SPA = 7,
+        Range = 35,
+        Placements = 3
+    },
+    ["Paragon"] = {
+        Damage = Calculate(12000, 110),
+        SPA = 6.5,
+        Range = 31,
+        Placements = 3
+    },
+    ["Experiment X (SUPER PERFECT)"] = {
+        Damage = Calculate(5070, 110),
+        SPA = 6,
+        Range = 34,
+        Placements = 4
+    },
+    ["Experiment X (PERFECT)"] = {
+        Damage = Calculate(2000, 110),
+        SPA = 6,
+        Range = 30,
+        Placements = 4
+    },
+    ["Blade Beast (Hybrid)"] = {
+        Damage = Calculate(7020, 110),
+        SPA = 8.5,
+        Range = 25,
+        Placements = 4,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.50,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Blade Beast"] = {
+        Damage = Calculate(2000, 110),
+        SPA = 6,
+        Range = 30,
+        Placements = 4,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.32,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Connor (Wizard King)"] = {
+        Damage = Calculate(25200, 110),
+        SPA = 10,
+        Range = 35,
+        Placements = 3
+    },
+    ["Connor"] = {
+        Damage = Calculate(6000, 110),
+        SPA = 10,
+        Range = 28,
+        Placements = 3
+    },
+    ["Elize"] = {
+        Damage = Calculate(1000, 110),
+        SPA = 5.5,
+        Range = 22,
+        Placements = 4
+    },
+    ["Elize (True Heart)"] = {
+        Damage = Calculate(3750, 110),
+        SPA = 6,
+        Range = 26,
+        Placements = 4,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Elize (Valkyrie)"] = {
+        Damage = Calculate(5525, 110),
+        SPA = 9,
+        Range = 33,
+        Placements = 4
+    },
+    ["Paradox (Divine Sight)"] = {
+        Damage = Calculate(5250, 110),
+        SPA = 6,
+        Range = 40,
+        Placements = 3
+    },
+    ["Paradox"] = {
+        Damage = Calculate(2000, 110),
+        SPA = 7,
+        Range = 15,
+        Placements = 3
+    },
+    ["Death Ninja (Immortal Butcher)"] = {
+        Damage = Calculate(10500, 110),
+        SPA = 6.5,
+        Range = 30,
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.30,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Blade Beast"] = {
+        Damage = Calculate(4000, 110),
+        SPA = 7,
+        Range = 26,
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.30,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Reliable Student (Echoes)"] = {
+        Damage = Calculate(11250, 110),
+        SPA = 7,
+        Range = 30,
+        Placements = 4
+    },
+    ["Reliable Student"] = {
+        Damage = Calculate(3300, 110),
+        SPA = 7.5,
+        Range = 24,
+        Placements = 4
+    },
+    ["Kyko (Crimson Spear)"] = {
+        Damage = Calculate(18200, 110),
+        SPA = 8,
+        Range = 40,
+        Placements = 4
+    },
+    ["Kyko "] = {
+        Damage = Calculate(7000, 110),
+        SPA = 7,
+        Range = 34,
+        Placements = 4
+    },
+    ["Joykid (Gear IV)"] = {
+        Damage = Calculate(17550, 110),
+        SPA = 7,
+        Range = 35,
+        Placements = 4
+    },
+    ["Joykid (Bounce) "] = {
+        Damage = Calculate(9900, 110),
+        SPA = 7.5,
+        Range = 30,
+        Placements = 4
+    },
+    ["Magic Girl (Salvation)"] = {
+        Damage = Calculate(9620, 110),
+        SPA = 6.5,
+        Range = 45,
+        Placements = 4
+    },
+    ["Magic Girl "] = {
+        Damage = Calculate(5200, 110),
+        SPA = 7,
+        Range = 39,
+        Placements = 4
     },
     
     
