@@ -614,6 +614,76 @@ local Units = {
         Range = 27,
         Placements = 3
     },
+    ["Fiery Commander (Hellfire)"] = {
+        Damage = Calculate(10500, 110),
+        SPA = 13,
+        Range = 35,
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Fire",  -- Тип эффекта (огонь)
+            DamagePerTick = 0.30,  -- 50% от урона за тик
+            Ticks = 5,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Ghost-kun (Bound)"] = {
+        Damage = Calculate(3500, 110),
+        SPA = 13.5,
+        Range = 33,
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Fire",  -- Тип эффекта (огонь)
+            DamagePerTick = 0.30,  -- 50% от урона за тик
+            Ticks = 5,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Skeleton Knight (King)"] = {
+        Damage = Calculate(30800, 110),
+        SPA = 6.5,
+        Range = 41,
+        Placements = 2
+    },
+    ["Skeleton Knight"] = {
+        Damage = Calculate(11000, 110),
+        SPA = 7,
+        Range = 34,
+        Placements = 2
+    },
+    ["Shizo (Flicker)"] = {
+        Damage = Calculate(14000, 110),
+        SPA = 8,
+        Range = 35,
+        Placements = 3
+    },
+    ["Shizo"] = {
+        Damage = Calculate(5000, 110),
+        SPA = 7,
+        Range = 27,
+        Placements = 3
+    },
+    ["Mangaka (Artist)"] = {
+        Damage = Calculate(10625, 110),
+        SPA = 6,
+        Range = 29,
+        Placements = 4
+    },
+    ["Mangaka"] = {
+        Damage = Calculate(6500, 110),
+        SPA = 6.5,
+        Range = 25,
+        Placements = 4
+    },
+    ["Pirate King (Final)"] = {
+        Damage = Calculate(24500, 110),
+        SPA = 5.5,
+        Range = 35,
+        Placements = 3
+    },
+    ["Pirate King"] = {
+        Damage = Calculate(9000, 110),
+        SPA = 7,
+        Range = 25,
+        Placements = 3
+    },
     
     
     skrilya = {
