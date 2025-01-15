@@ -362,12 +362,22 @@ local Units = {
         SPA = 6,
         Range = 28,
         Placements = 4
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
     },
     ["Tiger (Atsushi)"] = {
         Damage = Calculate(6430.3, 110),
         SPA = 7.5,
         Range = 25,
         Placements = 4
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 3,  -- Количество тиков (4 тика)
+        }
     },
     ["Toad Sensei (Toad Sage)"] = {
         Damage = Calculate(15600, 110),
@@ -544,13 +554,23 @@ local Units = {
         Damage = Calculate(35625, 110),
         SPA = 13,
         Range = 28,
-        Placements = 3
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
     },
     ["Berserker "] = {
         Damage = Calculate(11160, 110),
         SPA = 10,
         Range = 24,
-        Placements = 3
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 4,  -- Количество тиков (4 тика)
+        }
     },
     ["Golden Tyrant (Emperor)"] = {
         Damage = Calculate(32500, 110),
@@ -692,6 +712,78 @@ local Units = {
         Damage = Calculate(9000, 110),
         SPA = 7,
         Range = 25,
+        Placements = 3
+    },
+    ["Fused Hero"] = {
+        Damage = Calculate(70000, 110),
+        SPA = 6,
+        Range = 42,
+        Placements = 3
+    },
+    ["Captain (God)"] = {
+        Damage = Calculate(45000, 110),
+        SPA = 5,
+        Range = 10,
+        Placements = 3
+    },
+    ["Captain (Timeskip)"] = {
+        Damage = Calculate(10000, 110),
+        SPA = 5.5,
+        Range = 10,
+        Placements = 3
+    },
+    ["Saki (Cyanblade)"] = {
+        Damage = Calculate(8436, 110),
+        SPA = 4.5,
+        Range = 25,
+        Placements = 5
+    },
+    ["Saki"] = {
+        Damage = Calculate(5400, 110),
+        SPA = 6,
+        Range = 23,
+        Placements = 5
+    },
+    ["Priest (Heaven)"] = {
+        Damage = Calculate(5000, 110),
+        SPA = 3.5,
+        Range = 35,
+        Placements = 3
+    },
+    ["Priest (New Moon)"] = {
+        Damage = Calculate(6250, 110),
+        SPA = 5,
+        Range = 32,
+        Placements = 3
+    },
+    ["Priest (Enrico Pucci)"] = {
+        Damage = Calculate(4000, 110),
+        SPA = 5,
+        Range = 30,
+        Placements = 3
+    },
+    ["Red Scar"] = {
+        Damage = Calculate(700, 110),
+        SPA = 5,
+        Range = 22,
+        Placements = 3
+    },
+    ["Red Scar (Conqueror)"] = {
+        Damage = Calculate(1500, 110),
+        SPA = 5,
+        Range = 22,
+        Placements = 3
+    },
+    ["Millie (Holy)"] = {
+        Damage = Calculate(21000, 110),
+        SPA = 9,
+        Range = 35,
+        Placements = 3
+    },
+    ["Millie"] = {
+        Damage = Calculate(9000, 110),
+        SPA = 7,
+        Range = 27,
         Placements = 3
     },
     
