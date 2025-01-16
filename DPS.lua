@@ -1140,23 +1140,37 @@ local function SingleTrait(Name, Stats)
     return result
 end 
 
--- Применение всех комбинаций трейтов для двух трейтов
+-- Функция DoubleTrait V2
 local function DoubleTrait(Name, Stats)
     local result = {}
     local traitList = {}  -- Список для всех возможных комбинаций трейтов
-    for Trait1, Data1 in next, Traits do
-        for Trait2, Data2 in next, Traits do
+    local traits = {}  -- Список всех трейтов для удобного доступа
+
+    -- Собираем все трейты в список
+    for Trait, _ in pairs(Traits) do
+        table.insert(traits, Trait)
+    end
+
+    -- Перебираем трейты, исключая дубликаты
+    for i = 1, #traits do
+        for j = i, #traits do
+            local Trait1 = traits[i]
+            local Trait2 = traits[j]
+
+            -- Создаем комбинированные данные
             local combinedData = {}
-            for key, value in next, Data1 do
+            for key, value in pairs(Traits[Trait1]) do
                 combinedData[key] = value
             end
-            for key, value in next, Data2 do
+            for key, value in pairs(Traits[Trait2]) do
                 if combinedData[key] then
                     combinedData[key] = combinedData[key] * value  -- Умножаем значения для комбинированных трейтов
                 else
                     combinedData[key] = value
                 end
             end
+
+            -- Добавляем комбинацию в список
             table.insert(traitList, {Trait1, Trait2, combinedData})
         end
     end
