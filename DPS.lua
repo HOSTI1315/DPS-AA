@@ -1051,7 +1051,6 @@ local function applyBleed(Stats, Effect)
     return bleedDamageWithBuff / Stats["SPA"]  -- Урон от Bleed за секунду
 end
 
-
 -- Функция для применения Poison
 local function applyPoison(Stats, Effect)
     local basePoisonDamage = Stats["Damage"] * Effect["DamagePerTick"]
@@ -1071,7 +1070,7 @@ local function applyFire(Stats, Effect)
     return totalFireDamage / Stats["SPA"]  -- Урон от Fire за секунду
 end
 
--- Основная функция для расчета DPS
+-- Основная функция для расчета DPS и GDPS
 local function SingleHandler(Name, Trait, Stats, Data, wave)
     local Placements = Stats["Placements"]
     local Effect = Stats["Effect"]
@@ -1115,18 +1114,21 @@ local function SingleHandler(Name, Trait, Stats, Data, wave)
     -- Добавляем DoT эффекты (например, Bleed, Poison, Decay)
     DPS = DPS + bleedDPS + poisonDPS + decayDPS
 
-    -- Возвращаем результат расчета DPS для юнита
+    -- Рассчитываем GDPS
+    local GDPS = DPS * Placements
+
+    -- Возвращаем результат расчета DPS и GDPS для юнита
     return {
         Name = Name,
         Trait = Trait,
         DPS = DPS,
+        GDPS = GDPS,  -- Добавляем GDPS
         Damage = Damage,
         SPA = SPA,
         Range = Range,
         Placements = Placements
     }
 end
- 
 
 -- Применение всех Traits для одного трейта
 local function SingleTrait(Name, Stats)
@@ -1159,7 +1161,7 @@ local function DoubleTrait(Name, Stats)
         end
     end
 
-    -- Вычисляем DPS для каждой комбинации
+    -- Вычисляем DPS и GDPS для каждой комбинации
     for _, traits in ipairs(traitList) do
         local line = SingleHandler(Name, traits[1] .. "+" .. traits[2], Stats, traits[3])
         table.insert(result, line)
@@ -1168,9 +1170,9 @@ local function DoubleTrait(Name, Stats)
     return result
 end
 
--- Функция для сортировки по DPS
-local function sortByDPS(a, b)
-    return a.DPS > b.DPS  -- Сортируем по убыванию DPS
+-- Функция для сортировки по GDPS
+local function sortByGDPS(a, b)
+    return a.GDPS > b.GDPS  -- Сортируем по убыванию GDPS
 end
 
 -- Основная функция для отправки данных на вебхук
@@ -1191,17 +1193,17 @@ local function OutputResultsToWebhook(webhookUrl)
         end
     end
 
-    -- Сортируем результаты по DPS
-    table.sort(resultsTrait, sortByDPS)
-    table.sort(resultsDoubleTrait, sortByDPS)
+    -- Сортируем результаты по GDPS
+    table.sort(resultsTrait, sortByGDPS)
+    table.sort(resultsDoubleTrait, sortByGDPS)
 
     -- Генерация текста для первого файла (Trait)
     local fileContentTrait = ""
     local counter = 1
     for _, result in ipairs(resultsTrait) do
         fileContentTrait = fileContentTrait .. string.format(
-            "%d. %s Trait: %s | DPS: %s | Damage: %s | SPA: %s | Range: %s | Placements: %s\n",
-            counter, result.Name, result.Trait, format(result.DPS), format(result.Damage), format(result.SPA), format(result.Range), result.Placements
+            "%d. %s Trait: %s | GDPS: %s | DPS: %s | Damage: %s | SPA: %s | Range: %s | Placements: %s\n",
+            counter, result.Name, result.Trait, format(result.GDPS), format(result.DPS), format(result.Damage), format(result.SPA), format(result.Range), result.Placements
         )
         counter = counter + 1
     end
@@ -1211,8 +1213,8 @@ local function OutputResultsToWebhook(webhookUrl)
     counter = 1
     for _, result in ipairs(resultsDoubleTrait) do
         fileContentDoubleTrait = fileContentDoubleTrait .. string.format(
-            "%d. %s Trait Combination: %s | DPS: %s | Damage: %s | SPA: %s | Range: %s | Placements: %s\n",
-            counter, result.Name, result.Trait, format(result.DPS), format(result.Damage), format(result.SPA), format(result.Range), result.Placements
+            "%d. %s Trait Combination: %s | GDPS: %s | DPS: %s | Damage: %s | SPA: %s | Range: %s | Placements: %s\n",
+            counter, result.Name, result.Trait, format(result.GDPS), format(result.DPS), format(result.Damage), format(result.SPA), format(result.Range), result.Placements
         )
         counter = counter + 1
     end
