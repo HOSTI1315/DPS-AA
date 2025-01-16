@@ -965,6 +965,12 @@ local Units = {
         Range = 39,
         Placements = 4
     },
+    ["Illusionist (Transcended) "] = {
+        Damage = Calculate(54000, 110),
+        SPA = 6.98,
+        Range = 40,
+        Placements = 1
+    },
     
     
     skrilya = {
