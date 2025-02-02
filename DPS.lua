@@ -582,6 +582,30 @@ local Units = {
             Ticks = 4,  -- Количество тиков (4 тика)
         }
     },
+
+    ["Somber (Buzzsaw)"] = {
+        Damage = Calculate(38124, 110),
+        SPA = 13,
+        Range = 28,
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 6,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Somber"] = {
+        Damage = Calculate(8127, 110),
+        SPA = 7,
+        Range = 37,
+        Placements = 4,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Bleed",  -- Тип эффекта (огонь)
+            DamagePerTick = 1.25,  -- 50% от урона за тик
+            Ticks = 6,  -- Количество тиков (4 тика)
+        }
+    },
+    
     ["Golden Tyrant (Emperor)"] = {
         Damage = Calculate(32500, 110),
         SPA = 14,
