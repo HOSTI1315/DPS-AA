@@ -995,7 +995,23 @@ local Units = {
         Range = 40,
         Placements = 1
     },
-    
+        ["Spider (Immolation)"] = {
+        Damage = Calculate(25399, 110),
+        SPA = 9.13,
+        Range = 35,
+        Placements = 3,
+        Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
+            Type = "Fire",  -- Тип эффекта (огонь)
+            DamagePerTick = 0.07,  -- 50% от урона за тик
+            Ticks = 5,  -- Количество тиков (4 тика)
+        }
+    },
+    ["Spider"] = {
+        Damage = Calculate(6763.5, 110),
+        SPA = 5.75,
+        Range = 28,
+        Placements = 3
+    },
     
     skrilya = {
         Damage = Calculate(1315, 110),
