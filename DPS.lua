@@ -587,7 +587,7 @@ local Units = {
         Damage = Calculate(38124, 110),
         SPA = 13,
         Range = 28,
-        Placements = 3,
+        Placements = 4,
         Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
             Type = "Bleed",  -- Тип эффекта (огонь)
             DamagePerTick = 1.25,  -- 50% от урона за тик
@@ -995,7 +995,7 @@ local Units = {
         Range = 40,
         Placements = 1
     },
-        ["Spider (Immolation)"] = {
+    ["Spider (Immolation)"] = {
         Damage = Calculate(25399, 110),
         SPA = 9.13,
         Range = 35,
