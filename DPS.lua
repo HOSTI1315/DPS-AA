@@ -226,13 +226,13 @@ local Units = {
         Placements = 4
     },
     ["Dark Mage (Fallen Star)"] = {
-        Damage = Calculate(58827.31, 110),
-        SPA = 12,
-        Range = 36,
+        Damage = Calculate(49500, 110),
+        SPA = 13,
+        Range = 35,
         Placements = 3
     },
     ["Elf Mage (Aura)"] = {
-        Damage = Calculate(20208.47, 110),
+        Damage = Calculate(17550, 110),
         SPA = 5.5,
         Range = 48,
         Placements = 4
@@ -324,13 +324,13 @@ local Units = {
         }
     },
     ["Somber (Buzzsaw)"] = {
-        Damage = Calculate(38124, 110),
-        SPA = 13,
-        Range = 69.3,
+        Damage = Calculate(32305, 110),
+        SPA = 14,
+        Range = 70,
         Placements = 4,
         Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
             Type = "Bleed",  -- Тип эффекта (огонь)
-            DamagePerTick = 1.25,  -- 50% от урона за тик
+            DamagePerTick = 1.35,  -- 50% от урона за тик
             Ticks = 6,  -- Количество тиков (4 тика)
         }
     },
@@ -552,9 +552,9 @@ local Units = {
         }
     },
     ["Switchblade (Deception)"] = {
-        Damage = Calculate(46917.58, 110),
+        Damage = Calculate(58500, 110),
         SPA = 11,
-        Range = 41,
+        Range = 45,
         Placements = 3
     },
     ["Legendary Assassin (Prime)"] = {
@@ -574,6 +574,42 @@ local Units = {
         SPA = 13,
         Range = 43,
         Placements = 3
+    },
+    ["Killstreak (Speedrun)"] = {
+        Damage = Calculate(25000, 110),
+        SPA = 8,
+        Range = 40,
+        Placements = 4
+    },
+    ["Android AAA"] = {
+        Damage = Calculate(6000, 110),
+        SPA = 9,
+        Range = 35,
+        Placements = 4
+    },
+    ["Siren (Harpy)"] = {
+        Damage = Calculate(16380, 110),
+        SPA = 7,
+        Range = 33,
+        Placements = 4
+    },
+    ["Iceclaw (Azure Fang)"] = {
+        Damage = Calculate(37500, 110),
+        SPA = 9,
+        Range = 34,
+        Placements = 4
+    },
+    ["Psychic Princess (Evo)"] = {
+        Damage = Calculate(13332, 110),
+        SPA = 5.9,
+        Range = 36.9,
+        Placements = 4
+    },
+    ["Silver Slayer (Hunter)"] = {
+        Damage = Calculate(26159, 110),
+        SPA = 7.3,
+        Range = 32.2,
+        Placements = 4
     },
     
     skrilya = {
