@@ -535,8 +535,8 @@ local Units = {
         Placements = 4
     },
     ["Illusionist (Transcended) "] = {
-        Damage = Calculate(54000, 110),
-        SPA = 6.98,
+        Damage = Calculate(75000, 110),
+        SPA = 7,
         Range = 40,
         Placements = 1
     },
@@ -558,12 +558,23 @@ local Units = {
         Placements = 3
     },
     ["Legendary Assassin (Prime)"] = {
-        Damage = Calculate(29042, 110),
+        Damage = Calculate(37500, 110),
         SPA = 8.5,
-        Range = 39.9,
+        Range = 37,
         Placements = 3
     },
-
+    ["Legendary Assassin (MAX(200%))"] = {
+        Damage = Calculate(112500, 110),
+        SPA = 8.5,
+        Range = 37,
+        Placements = 3
+    },
+    ["Legendary Assassin (MAX(200%))"] = {
+        Damage = Calculate(14300, 110),
+        SPA = 13,
+        Range = 43,
+        Placements = 3
+    },
     
     skrilya = {
         Damage = Calculate(1315, 110),
