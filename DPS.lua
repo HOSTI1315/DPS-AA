@@ -267,7 +267,7 @@ local Units = {
         Placements = 4,
         Effect = {  -- Добавляем эффект для Ghost-kun (Bound)
             Type = "Bleed",  -- Тип эффекта (огонь)
-            DamagePerTick = 0.40,  -- 50% от урона за тик
+            DamagePerTick = 1.40,  -- 50% от урона за тик
             Ticks = 4  -- Количество тиков (4 тика)
     }
 },
