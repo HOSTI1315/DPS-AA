@@ -53,6 +53,18 @@ local Units = {
         Range = 32,
         Placements = 3
     },
+    ["Snow Reaper (Final) "] = {
+        Damage = Calculate(28466, 110),
+        SPA = 6,
+        Range = 32,
+        Placements = 4
+    },
+    ["Elyssia (Abyssal) "] = {
+        Damage = Calculate(55534, 110),
+        SPA = 3.7,
+        Range = 18.3,
+        Placements = 4
+    },
     ["Veko "] = {
         Damage = Calculate(2000, 110),
         SPA = 6,
